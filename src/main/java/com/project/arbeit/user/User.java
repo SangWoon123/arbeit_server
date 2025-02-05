@@ -1,10 +1,14 @@
 package com.project.arbeit.user;
 
+import com.project.arbeit.store.Store;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,6 +26,9 @@ public class User {
     private String email;
 
     private String name;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Store> stores = new ArrayList<>();
 
     @Builder
     public User(Long id, String uid, String email, String name) {
